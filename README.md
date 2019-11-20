@@ -8,12 +8,12 @@ Open Jupyter Notebook in this folder and open up the setup.ipynb. The notebook w
 
 ### Prerequisites
 
-*Anaconda Environment
-*jupyter notebook
-*scikit-learn
-*numpy
-*Pandas
+* Anaconda Environment
+* jupyter notebook
+* scikit-learn
+* numpy
+* Pandas
 * matplotlib
-*imutils
-*cv2 (to be removed for a lighter package)
+* imutils
+* cv2 (to be removed for a lighter package)
 
