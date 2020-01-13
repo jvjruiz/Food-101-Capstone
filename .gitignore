@@ -3,3 +3,10 @@ data
 food-101.tar.gz
 checkpoints
 *.pt
+history
+checkpoints
+src/__pycache__
+src/utils/__pycache__
+saved_models
+.vscode
+*.h5
