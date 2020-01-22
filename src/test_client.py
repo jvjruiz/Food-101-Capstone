@@ -11,7 +11,6 @@ test_url = addr + '/api/predict_food'
 
 # prepare headers for http request
 content_type = 'image/jpeg'
-headers = {'content-type': content_type}
 
 img = Image.open('../data/images/apple_pie/134.jpg')
 imgByteArr = io.BytesIO()

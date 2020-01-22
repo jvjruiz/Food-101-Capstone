@@ -6,16 +6,18 @@ from utils.dataset import get_labels
 from PIL import Image
 
 from utils.dataset import resize_image
+from flask_debug import Debug
 
 import pdb
 
 # Initialize the Flask application
 app = Flask(__name__)
+Debug(app)
 
 SERVER_URL = 'http://localhost:8501/v1/models/'
 
 # route http posts to this method
-@app.route('/api/predict_food', methods=['POST'])
+@app.route('/api/predict_food', methods=['GET','POST'])
 def predict_food():
     print('hi')
     r = request
@@ -47,4 +49,4 @@ def predict_food():
 
 
 # start flask app
-app.run(host="0.0.0.0", port=5000)
+app.run(host="0.0.0.0", port=5000,debug=True)
