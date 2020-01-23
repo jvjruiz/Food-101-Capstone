@@ -11,4 +11,5 @@ saved_models
 .vscode
 *.h5
 *.pt
+*.pth
 notebooks/__pycache__
