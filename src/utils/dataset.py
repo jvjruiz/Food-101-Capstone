@@ -92,8 +92,8 @@ def sort_images():
     else:
         print('Test files already copied into separate folders.')
 
-    if not os.path.isdir(cfg.VALID_DIR):
-        copytree(cfg.ROOT_IMAGE_PATH, cfg.VALID_DIR, ids_to_copy=generate_validation_ids())
+    if not os.path.isdir(cfg.SUBSET_VALID_DIR):
+        copytree(cfg.ROOT_IMAGE_PATH, cfg.SUBSET_VALID_DIR, ids_to_copy=generate_validation_ids())
     else:
         print('Validation files already copied into separate folders.')
 

@@ -15,7 +15,7 @@ RESIZED_SUBSET_VALID_DIR = "../data/subset/resized/valid"
 RESIZED_TRAIN_DIR = "../data/resized/train"
 RESIZED_TEST_DIR = "../data/resized/test"
 RESIZED_VALID_DIR = "../data/resized/valid"
-FINAL_SIZE = 299
+FINAL_SIZE = 224
 IMG_HEIGHT = 299
 IMG_WIDTH = 299
 
