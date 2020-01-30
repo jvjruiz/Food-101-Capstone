@@ -56,7 +56,7 @@ def generate_training_ids():
     train_dir_files = generate_dir_file_map('../data/meta/train.txt')
     ids_to_copy = list()
     for category in train_dir_files:
-        for file in train_dir_files[category][:200]:
+        for file in train_dir_files[category][:400]:
             ids_to_copy.append(file)
     return ids_to_copy
 
@@ -76,13 +76,13 @@ def generate_validation_ids():
     ids_to_copy = list()
     for category in test_dir_categories:
         # second_half_of_test_ids = test_dir_categories[category][len(test_dir_categories//2):]
-        for image_id in test_dir_categories[category]:
+        for image_id in test_dir_categories[category][:120]:
             ids_to_copy.append(image_id)
     return ids_to_copy
 
 # takes images from original directory and splits them into train/test/valid directories
 def sort_images():
-    if not os.path.isdir(cfg.VALID_DIR):
+    if not os.path.isdir(cfg.SUBSET_TRAIN_DIR):
         copytree(cfg.ROOT_IMAGE_PATH, cfg.SUBSET_TRAIN_DIR, ids_to_copy=generate_training_ids())
     else:
         print('Train files already copied into separate folders.')
@@ -92,8 +92,8 @@ def sort_images():
     # else:
     #     print('Test files already copied into separate folders.')
 
-    if not os.path.isdir(cfg.VALID_DIR):
-        copytree(cfg.ROOT_IMAGE_PATH, cfg.VALID_DIR, ids_to_copy=generate_validation_ids())
+    if not os.path.isdir(cfg.SUBSET_VALID_DIR):
+        copytree(cfg.ROOT_IMAGE_PATH, cfg.SUBSET_VALID_DIR, ids_to_copy=generate_validation_ids())
     else:
         print('Validation files already copied into separate folders.')
 
