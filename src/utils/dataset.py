@@ -56,7 +56,7 @@ def generate_training_ids():
     train_dir_files = generate_dir_file_map('../data/meta/train.txt')
     ids_to_copy = list()
     for category in train_dir_files:
-        for file in train_dir_files[category][:200]:
+        for file in train_dir_files[category]:
             ids_to_copy.append(file)
     return ids_to_copy
 
@@ -65,8 +65,8 @@ def generate_testing_ids():
     test_dir_categories = generate_dir_file_map('../data/meta/test.txt')
     ids_to_copy = list()
     for category in test_dir_categories:
-        # first_half_of_test_ids = test_dir_categories[category][:len(test_dir_categories)//2]
-        for image_id in test_dir_categories[category][40:80]:
+        first_half_of_test_ids = test_dir_categories[category][:len(test_dir_categories[category])//2]
+        for image_id in first_half_of_test_ids:
             ids_to_copy.append(image_id)
     return ids_to_copy
 
@@ -75,22 +75,22 @@ def generate_validation_ids():
     test_dir_categories = generate_dir_file_map('../data/meta/test.txt')
     ids_to_copy = list()
     for category in test_dir_categories:
-        # second_half_of_test_ids = test_dir_categories[category][len(test_dir_categories//2):]
-        for image_id in test_dir_categories[category]:
+        second_half_of_test_ids = test_dir_categories[category][len(test_dir_categories[category])//2:]
+        for image_id in second_half_of_test_ids:
             ids_to_copy.append(image_id)
     return ids_to_copy
 
 # takes images from original directory and splits them into train/test/valid directories
 def sort_images():
-    if not os.path.isdir(cfg.VALID_DIR):
-        copytree(cfg.ROOT_IMAGE_PATH, cfg.SUBSET_TRAIN_DIR, ids_to_copy=generate_training_ids())
+    if not os.path.isdir(cfg.TRAIN_DIR):
+        copytree(cfg.ROOT_IMAGE_PATH, cfg.TRAIN_DIR, ids_to_copy=generate_training_ids())
     else:
         print('Train files already copied into separate folders.')
 
-    # if not os.path.isdir(cfg.SUBSET_TEST_DIR):
-    #     copytree(cfg.ROOT_IMAGE_PATH, cfg.SUBSET_TEST_DIR, ids_to_copy=generate_testing_ids())
-    # else:
-    #     print('Test files already copied into separate folders.')
+    if not os.path.isdir(cfg.TEST_DIR):
+        copytree(cfg.ROOT_IMAGE_PATH, cfg.TEST_DIR, ids_to_copy=generate_testing_ids())
+    else:
+        print('Test files already copied into separate folders.')
 
     if not os.path.isdir(cfg.VALID_DIR):
         copytree(cfg.ROOT_IMAGE_PATH, cfg.VALID_DIR, ids_to_copy=generate_validation_ids())
