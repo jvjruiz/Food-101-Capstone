@@ -13,6 +13,9 @@ import pandas as pd
 
 from glob import glob
 
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import config as cfg
 
 # create functions for copying files and ignoring files
@@ -120,22 +123,31 @@ def resize_by_enlarge(im, width, height):
     w, h = im.size
     final_size = cfg.FINAL_SIZE
     new_image_size = tuple([w,h])
-    if w < final_size:
+    if w > final_size and h > final_size:
+        return im
+    elif w < final_size:
         # get ratio of final size to width
         ratio = final_size/float(w)
         # increase height by ratio
         new_image_size = tuple([int(final_size),int(h*ratio)])
         # print('resized item {}'.format(item))
-        print(new_image_size)
     elif h < final_size:
         ratio = final_size/float(h)
         new_image_size = tuple([int(w * ratio), int(final_size)])
         # print('resized item {}'.format(item))
-        print(new_image_size)
     resized_im = im.resize(new_image_size)
     return resized_im
 
+def center_crop(im, new_width, new_height):
+    w, h = im.size   # Get dimensions
 
+    left = (w - new_width)/2
+    top = (h - new_height)/2
+    right = (w + new_width)/2
+    bottom = (h + new_height)/2
+
+    # Crop the center of the image
+    return im.crop((left, top, right, bottom))
 
 # resizes images to specified height/width while keeping a consistent ratio
 # by filling the rest of the picture with black
