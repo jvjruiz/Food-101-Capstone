@@ -31,3 +31,7 @@ Open Jupyter Notebook in this folder and open up the setup.ipynb. The notebook w
     c. [CNN](CNN.ipynb)  
     d. [Pre-trained VGG16 with Custom End Layers](CNN_VGG16.ipynb)  
 
+
+
+docker build --tag food-class $(pwd)/app
+docker run -p 5000:5000 -v /$(pwd)/app:/app food-class
