@@ -6,14 +6,14 @@ from torch import optim, cuda
 from torch.utils.data import DataLoader, sampler
 import torch.nn as nn
 
-from torch_lr_finder import LRFinder
-
 # Data science tools
 import pandas as pd
 import numpy as np
 
 # Timing utility
 from timeit import default_timer as timer
+
+# App config
 from config import IMG_SIZE, BATCH_SIZE, TRAIN_DIR, VALID_DIR, TEST_DIR
 
 # Whether to train on a gpu
