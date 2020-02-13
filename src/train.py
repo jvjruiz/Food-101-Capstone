@@ -12,6 +12,7 @@ from torch_lr_finder import LRFinder
 import numpy as np
 
 from utils.model import get_dataloaders, get_image_transforms, get_model, get_optimizer_scheduler_and_criterion, train_model
+from utils.dataset import sort_images
 
 # Initialize parameters
 
@@ -26,8 +27,10 @@ checkpoint_file_name = 'resnet50-transfer11.pth'
 
 # Change to fit hardware
 batch_size = 32
-
 image_size = 224
+
+# Sort images into proper directories
+sort_images()
 
 # Whether to train on a gpu
 train_on_gpu = cuda.is_available()
