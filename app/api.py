@@ -31,9 +31,9 @@ model.fc = classifier
 model
 
 if torch.cuda.is_available():
-    model.load_state_dict(torch.load(os.path.join('models','resnet50-transfer10.pt')))
+    model.load_state_dict(torch.load(os.path.join('models','food-classifier.pt')))
 else:
-    model.load_state_dict(torch.load(os.path.join('models','resnet50-transfer10.pt'), map_location= torch.device('cpu')))
+    model.load_state_dict(torch.load(os.path.join('models','food-classifier.pt'), map_location= torch.device('cpu')))
 
 model.eval()
 

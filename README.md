@@ -27,9 +27,25 @@ With this project I aim to build a model that can be deployed and used to identi
     2. Start training Model
     3. Evaluate and visualize model
 
-### Steps to Running API
-1. Build the container with the following command: `docker build --tag food-class $(PATH TO ROOT OF PROJECT)/app`
-2. Run Container with the following command `docker run -p 5000:5000 -v /$(PATH TO ROOT OF PROJECT)/app:/app food-class`
+### Steps to Training Model
+There are two ways to train the model with this repo.
+1. Through the jupyter notebook
+2. Directly though the python script
+
+To run with the jupyter notebook follow these steps:
+1. Run `jupyter notebook` in the command line
+2. Navigate to the notebooks folder and open pytorch_cnn_resnet50.ipynb
+3. Run all cells
+
+To run directly with the scripts follow these steps:
+1. `cd src/`
+2. python train.py
+
+### Steps to Running API\
+1. Download pre-trained model [Here](https://drive.google.com/open?id=1pixiwUplEVh-ZjTtYERvec-ijsHIKby6)
+2. Move downloaded model to the folder $(PROJECT ROOT)/app/models
+2. Build the container with the following command: `docker build --tag food-class $(PROJECT ROOT)/app`
+2. Run Container with the following command `docker run -p 5000:5000 -v /$(PROJECT ROOT)/app:/app food-class`
 3. Open up your browser and go to http://localhost:5000 to access the webapp
 
 
