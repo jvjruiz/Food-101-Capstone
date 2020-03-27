@@ -22,7 +22,7 @@ With this project I aim to build a model that can be deployed and used to identi
 1. Download the data.
 2. Extract Contents from '.tar' file into root of project folder.
 3. Rename the folder "food-101" to "data".
-3. Open up the [Exploratory Data Analysis Notebook](notebooks/pytorch_cnn_resnet50.ipynb) and let all of the cells run. 
+3. Open up the [PyTorch CNN Notebook](notebooks/pytorch_cnn_resnet50.ipynb) and let all of the cells run. 
     1. This will arrange the data and do some image pre-processing. 
     2. Start training Model
     3. Evaluate and visualize model
@@ -41,7 +41,7 @@ To run directly with the scripts follow these steps:
 1. `cd src/`
 2. python train.py
 
-### Steps to Running API\
+### Steps to Running API
 1. Download pre-trained model [Here](https://drive.google.com/open?id=1pixiwUplEVh-ZjTtYERvec-ijsHIKby6)
 2. Move downloaded model to the folder $(PROJECT ROOT)/app/models
 2. Build the container with the following command: `docker build --tag food-class $(PROJECT ROOT)/app`
