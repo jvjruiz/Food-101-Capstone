@@ -16,9 +16,25 @@ $(document).ready(function (e) {
             type: 'post',
             success: function (response) {
                 response = JSON.parse(response)
-                var message = "The predicted label is: " + response['label']
+                var message = ''
+                
+                if (response['error'] == true) {
+                    message = response['message']
+                }
+                else {
+                    console.log(response['confidence'])
+                    console.log(response['label'])
+                    if (response['confidence'] > .75) {
+                        message = "The predicted label is: " + response['label']
+                        $('#response-form-container').show()
+                    }
+                    else {
+                        message = "The image was not able to be classified, please try another."
+                        $('#response-form-container').hide()
+                    
+                    }
+                }
                 $('#msg').html(message); // display success response from the server
-                $('#response-form-container').show()
             },
             error: function (response) {
                 $('#msg').html(response); // display error response from the server

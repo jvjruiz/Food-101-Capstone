@@ -44,16 +44,23 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
         # get file from request
         img_data = request.files['file']
-        #convert to bytes
+
+        # ensure file is an image
+        img_extensions =['ras', 'xwd', 'bmp', 'jpe', 'jpg', 'jpeg', 'xpm', 'ief', 'pbm', 'tif', 'gif', 'ppm', 'xbm', 'tiff', 'rgb', 'pgm', 'png', 'pnm']
+        if img_data.filename.split('.')[1] not in img_extensions:
+            return jsonify(message='Please upload an appropriate image file', error=True)
+
+        # convert to bytes
         img_bytes = img_data.read()
-        label = get_prediction(image_bytes=img_bytes)
-        return jsonify(label=label)
+        # get prediction for image
+        label, confidence = get_prediction(image_bytes=img_bytes)
+
+        return jsonify(label=label, confidence=confidence)
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -100,14 +107,21 @@ def transform_image(image_bytes):
     return image_transforms(image).unsqueeze(0)
 
 def get_prediction(image_bytes):
+    # get all possible classes in a list
     classes = get_classes()
+    # transform image to given tensor size and normalize
     tensor = transform_image(image_bytes)
-    outputs = model.forward(tensor)
-    _, y_hat = outputs.max(1)
-    print(y_hat)
-    predicted_idx = y_hat.item()
+    # get class outputs
+    outputs = model(tensor)
+    # run through softmax layer to normalize results to add up to 1
+    softmax = torch.nn.functional.softmax(outputs, dim=1)
+    # get top results
+    top_prob, top_label = torch.topk(softmax, 1)
+
+    predicted_idx = top_label
     prediction = classes[predicted_idx]
-    return prediction
+
+    return prediction, top_prob.item()
 
 # start flask app
 if __name__ == "__main__":
