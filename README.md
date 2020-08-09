@@ -44,9 +44,10 @@ To run directly with the scripts follow these steps:
 ### Steps to Running API
 1. Download pre-trained model [Here](https://drive.google.com/open?id=1pixiwUplEVh-ZjTtYERvec-ijsHIKby6)
 2. Move downloaded model to the folder $(PROJECT ROOT)/app/models
-2. Build the container with the following command: `docker build --tag food-class $(PROJECT ROOT)/app`
-2. Run Container with the following command `docker run -p 5000:5000 -v /$(PROJECT ROOT)/app:/app food-class`
-3. Open up your browser and go to http://localhost:5000 to access the webapp
+3. Navigate to `$(PROJECT ROOT)/app`
+3. Build the container with the following command: `docker build --tag food-class .`
+4. Run Container with the following command `docker run -p 5000:5000 --detach food-class`
+5. Open up your browser and go to http://localhost:5000 to access the webapp
 
 
 
